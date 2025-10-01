@@ -18,7 +18,8 @@ function App() {
   const [ formState, setFormState] = useState({
     title: "",
     description: "",
-    deadline: ""
+    deadline: "",
+    priority:"Low",
   });
 
   const doneHandler = (taskIndex) => {
@@ -47,6 +48,9 @@ function App() {
       case "deadline":
           form.deadline = event.target.value;
           break;
+      case "priority":
+          form.priority = event.target.value;
+          break;
       default:
           form = formState;
     }
@@ -65,9 +69,7 @@ function App() {
     setTaskState({tasks});
   }
 
-
-
-    return (
+  return (
     <div className="container">
       <h1>Tasky</h1>
         {taskState.tasks.map((task, index) => (              
@@ -81,8 +83,16 @@ function App() {
       markDone={() => doneHandler(index)}
       deleteTask = {() => deleteHandler(index)}
     />
+
   ))} 
-    <AddTaskForm submit={formSubmitHandler} change={formChangeHandler}/>
+    <AddTaskForm  
+      submit={formSubmitHandler} 
+      change={formChangeHandler} 
+      title={formState.title} 
+      description={formState.description} 
+      deadline={formState.deadline} 
+      priority={formState.priority}
+    />
 
     </div>
   );
